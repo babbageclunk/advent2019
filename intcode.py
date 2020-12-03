@@ -1,5 +1,8 @@
 # day 5 part 1
 
+class StopError(Exception):
+    pass
+
 class Op:
     def __init__(self, pos, value):
         self.pos = pos
@@ -198,3 +201,13 @@ class Output:
     def __call__(self, val):
         self.sent = True
         self.val = val
+
+def rund7(prog, read, write, loud=False):
+    pos = 0
+    try:
+        while True:
+            pos = d5execute(prog, pos, read, write)
+    except StopError as e:
+        if loud:
+            print(f"stopped at {e}")
+    return prog
